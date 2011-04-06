@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "md5server", "md5server\md5server.csproj", "{CEC601B7-0716-4561-9CDF-BD438D9091C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEC601B7-0716-4561-9CDF-BD438D9091C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC601B7-0716-4561-9CDF-BD438D9091C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC601B7-0716-4561-9CDF-BD438D9091C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC601B7-0716-4561-9CDF-BD438D9091C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

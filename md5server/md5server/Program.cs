@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Licensed under Stallman's beard
+
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -20,17 +22,25 @@ namespace server
             return false;
         }
 		
-		static bool saveSanity(StreamReader SR){
+		static bool logSanity(StreamReader SR){
+
 				return true;
 		}
 		
-		static void writeLog(StreamWriter SW, string hash, int last){
+		static void writeLog(string logFile, string hash, int last){
+			StreamReader SR = new StreamReader(logFile);
 			StringBuilder textBuffer = new StringBuilder("");
-			for (int i = 0; i < 20; i++)
-				textBuffer.Append('*');
 			textBuffer.AppendLine(DateTime.Now.ToString());
 			textBuffer.AppendLine("Hash: " + hash);
 			textBuffer.AppendLine("Last Cracked: " + last.ToString());
+			for (int i = 0; i < 20; i++)
+				textBuffer.Append('-');
+			textBuffer.AppendLine();
+			textBuffer.Append(SR.ReadToEnd());
+			SR.Close();
+			StreamWriter SW = new StreamWriter(logFile);
+			SW.Write(textBuffer.ToString());
+			SW.Close();
 		}
 		
         static void Main(string[] args)
@@ -44,15 +54,16 @@ namespace server
             string returnData = "";
             string plaintext = "";
             string hash = null;
-            string historyFile = @"./md5hist.txt";
-            if (File.Exists(historyFile))
+            string logFile = @"./md5hist.txt";
+            if (File.Exists(logFile))
             {
-                StreamReader SR = File.OpenText(historyFile);
-                string tempmd5 = SR.ReadLine();
+                StreamReader SR = File.OpenText(logFile);
+				SR.ReadLine();
+                string tempmd5 =  SR.ReadLine().Split()[1];
                 if (isMD5(tempmd5))
                 {
                     hash = tempmd5;
-                    Int32.TryParse(SR.ReadLine(), out start);
+                    Int32.TryParse(SR.ReadLine().Split()[2], out start);
                 }
                 SR.Close();
             }
@@ -73,12 +84,10 @@ namespace server
                 }
             }
 
-            if (!File.Exists(historyFile))
+            if (!File.Exists(logFile))
             {
-                //File.Create(historyFile);
-                StreamWriter SW = new StreamWriter(historyFile);
-                SW.WriteLine(hash + Environment.NewLine + start);
-                SW.Close();
+				File.Create(logFile);
+				writeLog(logFile,hash,start);
             }
 
             bool complete = false;
@@ -102,9 +111,7 @@ namespace server
                     if (returnData.Substring(0, 3) == "NEW")
                     {
                         sendBlock(start, remoteIPEndPoint.Address, remotePort,hash);
-                        StreamWriter SW = new StreamWriter(historyFile);
-                        SW.WriteLine(hash + Environment.NewLine + start);
-                        SW.Close();
+						writeLog(logFile,hash,start);
                         start += Int32.Parse(returnData.Substring(3));
                     }
                     if (returnData.Substring(0, 3) == "FIN")
