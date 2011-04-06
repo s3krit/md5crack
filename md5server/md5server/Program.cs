@@ -22,9 +22,19 @@ namespace server
             return false;
         }
 		
-		static bool logSanity(StreamReader SR){
-
+		static bool logSanity(string logFile){
+			StreamReader SR = new StreamReader(logFile);
+			StringBuilder stringBuffer = new StringBuilder("");
+			string logRegex = @"^[\d/: ]+[AP]M.*Hash: [a-fA-F0-9]{32}.*Last Cracked: \d+$";
+			// only needs to check the latest log; that is, the first 3 lines
+			for (int i = 0; i < 3; i++){
+				stringBuffer.Append(SR.ReadLine());
+			}
+			Match match = Regex.Match(stringBuffer.ToString(),logRegex,RegexOptions.Singleline);
+			if (match.Success){
 				return true;
+			}
+			return false;
 		}
 		
 		static void writeLog(string logFile, string hash, int last){
@@ -60,16 +70,23 @@ namespace server
             string logFile = @"./md5log.txt";
             if (File.Exists(logFile))
             {
-                StreamReader SR = File.OpenText(logFile);
-				SR.ReadLine();
-                string tempmd5 =  SR.ReadLine().Split()[1];
-                if (isMD5(tempmd5))
-                {
-                    hash = tempmd5;
-                    Int32.TryParse(SR.ReadLine().Split()[2], out start);
-                }
-                SR.Close();
-            }
+				if (logSanity(logFile)){
+                	StreamReader SR = File.OpenText(logFile);
+					SR.ReadLine();
+               		string tempmd5 =  SR.ReadLine().Split()[1];
+                	if (isMD5(tempmd5))
+               		 {
+                    	hash = tempmd5;
+                   	 	Int32.TryParse(SR.ReadLine().Split()[2], out start);
+                	}
+                	SR.Close();
+				} else {
+					Console.WriteLine("Corrupt log file. Proceeding without.");
+				}
+				
+            } else {
+				Console.WriteLine("No log found. Proceeding without");
+			}
 
             // check that hash contains a valid MD5 sum
             setHash(ref hash);
