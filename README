@@ -1,0 +1,4 @@
+This program is part of a University assignment on Network and Grid Computing. We were tasked with writing some software capable of cracking MD5 hashes by distributing the work across a network.
+
+All code is written by me: Martin Pugh
+I'll add in licensing info later... any questions, email pugh@lavabit.com
