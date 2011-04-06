@@ -28,6 +28,9 @@ namespace server
 		}
 		
 		static void writeLog(string logFile, string hash, int last){
+			if (!File.Exists(logFile)){
+				File.Create(logFile);
+			}
 			StreamReader SR = new StreamReader(logFile);
 			StringBuilder textBuffer = new StringBuilder("");
 			textBuffer.AppendLine(DateTime.Now.ToString());
@@ -54,7 +57,7 @@ namespace server
             string returnData = "";
             string plaintext = "";
             string hash = null;
-            string logFile = @"./md5hist.txt";
+            string logFile = @"./md5log.txt";
             if (File.Exists(logFile))
             {
                 StreamReader SR = File.OpenText(logFile);
@@ -82,14 +85,15 @@ namespace server
                         hash = Console.ReadLine();
                     }
                 }
-            }
-
-            if (!File.Exists(logFile))
-            {
 				File.Create(logFile);
-				writeLog(logFile,hash,start);
+				start = 0;
             }
-
+			
+			if(!File.Exists(logFile)){
+				writeLog(logFile,hash,start);
+			}
+				
+			
             bool complete = false;
 
             UdpClient udpClient = new UdpClient(listeningPort);
