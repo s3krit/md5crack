@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="md5server">
+</Property><Property Name="Solution File" Value="C:\Users\mjp\Documents\Visual Studio 2010\Projects\md5crack\md5server\md5server.sln">
+</Property><Property Name="Date" Value="04 March 2012">
+</Property><Property Name="Time" Value="00:31">
+</Property></Properties><Event ErrorLevel="0" Project="md5server" Source="md5server\md5server.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="md5server" Source="md5server\md5server.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="md5server.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="md5server.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="md5server" Source="md5server\md5server.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

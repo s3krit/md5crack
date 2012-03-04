@@ -25,7 +25,6 @@ namespace stringcount
             }
             int blockSize;
             int benchmarkSecs = 2;
-            string range = "";
             string hash = "";
             string recv = "";
           string plaintext;

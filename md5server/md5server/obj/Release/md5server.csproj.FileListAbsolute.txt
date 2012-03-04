@@ -8,3 +8,5 @@ F:\md5crack\md5server\md5server\obj\Release\md5server.pdb
 F:\md5crack\md5server\md5server\obj\Release\ResolveAssemblyReference.cache
 F:\md5crack\md5server\md5server\bin\Release\md5server.exe
 F:\md5crack\md5server\md5server\bin\Release\md5server.pdb
+C:\Users\mjp\Documents\Visual Studio 2010\Projects\md5crack\md5server\md5server\obj\Release\md5server.exe
+C:\Users\mjp\Documents\Visual Studio 2010\Projects\md5crack\md5server\md5server\obj\Release\md5server.pdb
